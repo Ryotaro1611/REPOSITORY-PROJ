@@ -16,9 +16,10 @@ import java.awt.*;
  * 
  * Gaddis, T. (2015). Starting out with Java: From control structures through objects. Addison-Wesley. 
  * 
- * <<add more references here>>
+ * Oracle. (n.d.). JButton (Java Platform SE 8). Retrieved April 15, 2026, from 
+ * https://docs.oracle.com/javase/8/docs/api/javax/swing/JButton.html
  *  
- * Version/date: 
+ * Version/date: V1 4/24/26
  * 
  * Responsibilities of class:
  * Represents a tile in the game whilist storing its values and position
@@ -28,7 +29,8 @@ import java.awt.*;
  */
 
 // Tile Button is a JButton
-public class TileButton extends JButton {
+public class TileButton extends JButton 
+{
 
 	// Tile button has a value
     private int value;
