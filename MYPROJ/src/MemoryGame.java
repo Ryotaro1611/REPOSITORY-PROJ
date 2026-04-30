@@ -157,7 +157,6 @@ public class MemoryGame extends JFrame
         // Refresh UI
         revalidate();
         repaint();
-        pack();
     }
 
     /**
