@@ -1,6 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
-
+import java.io.PrintWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 /**
 * 
  * Lead Author(s):
@@ -26,10 +30,11 @@ import java.awt.*;
  * Oracle. (n.d.). GridLayout (Java Platform SE 8). Retrieved April 20, 2026, from 
  * https://docs.oracle.com/javase/8/docs/api/java/awt/GridLayout.html
  *
+ *
  * Stack Overflow. (n.d.). JOptionPane showMessageDialog example. Retrieved April 20, 2026, from 
  * https://stackoverflow.com/questions/7080205/joptionpane-showmessagedialog-example
  *  
- * Version/Date: V1 4/23/26
+ * Version/Date: V1 4/30/26
  *  
  * Responsibilities of class:
  * Acts as the main window (JFrame) for the memory game.
@@ -71,7 +76,7 @@ public class MemoryGame extends JFrame
      */
     public MemoryGame() 
     {
-        setTitle("Number Memory Game");
+        setTitle("Matrix Grid Memory Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Use BorderLayout for main layout
@@ -152,7 +157,7 @@ public class MemoryGame extends JFrame
         gameTimer.resetTimer();
 
         // Reset instructions
-        instructionLabel.setText("Memorize the pattern, then press Start Timer.");
+        instructionLabel.setText("Memorize the pattern of the Matrix Grid, then press Start Timer.");
 
         // Refresh UI
         revalidate();
@@ -199,12 +204,12 @@ public class MemoryGame extends JFrame
         // Check if board matches correct pattern
         if (gameBoard.isCorrectOrder()) 
         {
-            JOptionPane.showMessageDialog(this, "You remembered!");
+            JOptionPane.showMessageDialog(this, "You ROCK!");
             instructionLabel.setText("You remembered! Press Reset to play again.");
         } 
         else 
         {
-            JOptionPane.showMessageDialog(this, "You forgot");
+            JOptionPane.showMessageDialog(this, "Try again bud");
             instructionLabel.setText("You forgot. Press Reset to try again.");
         }
 
@@ -220,6 +225,27 @@ public class MemoryGame extends JFrame
         gameTimer.stopTimer();
         setupBoard();
     }
+    
+    /**
+     * Saves game score into file
+     */
+    public void saveScore(String playerName, int time)
+    {
+    	try
+    	{
+    		PrintWriter writer = 
+    				new PrintWriter(new FileWriter("scores.txt", true))
+    				
+    		writer.println(playerName + "," + time);
+    		
+    		writer.close();
+    	}
+    	catch (IOException e)
+    	{
+    		System.out.println("Error saving score. ");
+    	}
+    }
+    
 
     /**
      * Returns whether the game has started
