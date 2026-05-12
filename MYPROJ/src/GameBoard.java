@@ -32,7 +32,7 @@ import java.util.List;
  * Stack Overflow. (n.d.). Random shuffling of an array or list in Java. Retrieved April 18, 2026, from
  * https://stackoverflow.com/questions/1519736/random-shuffling-of-an-array
  * 
- * Version/Date: V1 4/24/26
+ * Version/Date: V1 4/30/26
  * 
  * Responsibilities of class:
  * Represents the game board for the memory game.
@@ -69,7 +69,7 @@ public class GameBoard extends JPanel
         // Create tile grid and pattern storage
         this.tiles = new TileButton[gridSize][gridSize];
         this.correctPattern = new int[gridSize][gridSize];
-
+        
         // Create correct patter
         generatePattern();
         
@@ -116,6 +116,7 @@ public class GameBoard extends JPanel
         // Grid layout for tiles
         setLayout(new GridLayout(gridSize, gridSize, 5, 5));
 
+        
         for (int row = 0; row < gridSize; row++) 
         {
             for (int col = 0; col < gridSize; col++) 
