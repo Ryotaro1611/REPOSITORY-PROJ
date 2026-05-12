@@ -34,6 +34,12 @@ import java.util.Scanner;
  * Stack Overflow. (n.d.). JOptionPane showMessageDialog example. Retrieved April 20, 2026, from 
  * https://stackoverflow.com/questions/7080205/joptionpane-showmessagedialog-example
  *  
+ * Oracle. (n.d.). Reading, Writing, and Creating Files. Retrieved May 12, 2026, from
+ * https://docs.oracle.com/javase/tutorial/essential/io/file.html
+ *
+ * Oracle. (n.d.). The try-with-resources Statement. Retrieved May 12, 2026, from
+ * https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html
+ *  
  * Version/Date: V1 4/30/26
  *  
  * Responsibilities of class:
