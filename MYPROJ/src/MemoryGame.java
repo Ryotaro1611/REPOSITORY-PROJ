@@ -1,8 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
-import java.io.PrintWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.io.IOException;
 import java.util.Scanner;
 /**
@@ -233,11 +233,13 @@ public class MemoryGame extends JFrame
     {
     	try
     	{
+    		//Create file
     		PrintWriter writer = 
-    				new PrintWriter(new FileWriter("scores.txt", true))
+    				new PrintWriter(new FileWriter("scores.txt", true));
     				
     		writer.println(playerName + "," + time);
     		
+    		//Save and close writer
     		writer.close();
     	}
     	catch (IOException e)
