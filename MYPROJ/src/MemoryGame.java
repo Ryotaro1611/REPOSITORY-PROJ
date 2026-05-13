@@ -30,7 +30,6 @@ import java.util.Scanner;
  * Oracle. (n.d.). GridLayout (Java Platform SE 8). Retrieved April 20, 2026, from 
  * https://docs.oracle.com/javase/8/docs/api/java/awt/GridLayout.html
  *
- *
  * Stack Overflow. (n.d.). JOptionPane showMessageDialog example. Retrieved April 20, 2026, from 
  * https://stackoverflow.com/questions/7080205/joptionpane-showmessagedialog-example
  *  
@@ -39,7 +38,16 @@ import java.util.Scanner;
  *
  * Oracle. (n.d.). The try-with-resources Statement. Retrieved May 12, 2026, from
  * https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html
+ * 
+ * Oracle. (n.d.). Class FileWriter. Retrieved May 13, 2026, from
+ * https://docs.oracle.com/javase/8/docs/api/java/io/FileWriter.html
+ * 
+ * Oracle. (n.d.). Class PrintWriter. Retrieved May 13, 2026, from
+ * https://docs.oracle.com/javase/8/docs/api/java/io/PrintWriter.html
  *  
+ * Oracle. (n.d.). Class Scanner. Retrieved May 13, 2026, from
+ * https://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html
+ * 
  * Version/Date: V1 4/30/26
  *  
  * Responsibilities of class:
@@ -210,13 +218,26 @@ public class MemoryGame extends JFrame
         // Check if board matches correct pattern
         if (gameBoard.isCorrectOrder()) 
         {
+        	// Get player name after game
+        	String playerName = JOptionPane.showInputDialog(
+        			this,
+        			"Enter your name:");
+        	
+        	// Save score
+        	saveScore(playerName, gameTimer.getElapsedSeconds());
+        	
             JOptionPane.showMessageDialog(this, "You ROCK!");
-            instructionLabel.setText("You remembered! Press Reset to play again.");
+            instructionLabel.setText("You remembered! Press Reset to play again.");  
+           
+            // Display scores
+            loadScores();
+            
         } 
         else 
         {
             JOptionPane.showMessageDialog(this, "Try again bud");
             instructionLabel.setText("You forgot. Press Reset to try again.");
+           
         }
 
         // End game
@@ -250,7 +271,42 @@ public class MemoryGame extends JFrame
     	}
     	catch (IOException e)
     	{
-    		System.out.println("Error saving score. ");
+    		System.out.println("Error saving score.");
+    	}
+    }
+    
+    /**
+     * Loads scores from file
+     */
+    public void loadScores()
+    {
+    	try
+    	{
+    		// Open file
+    		Scanner scan = new Scanner(new File("scores.txt"));
+    		
+    		String scores = " ";
+    		
+    		// Read until the end
+    		while(scan.hasNextLine())
+    		{
+    			scores += scan.nextLine() + "\n";
+    		}
+    		
+    		scan.close();
+    		
+    		//Display score
+    		JOptionPane.showMessageDialog(
+    				this, 
+    				scores,
+    				"High Scores",
+    				JOptionPane.INFORMATION_MESSAGE);
+    		
+    	}
+    	
+    	catch(Exception e)
+    	{
+    		System.out.println("Could not load scores.");
     	}
     }
     
