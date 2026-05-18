@@ -3,7 +3,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 /**
 * Lead Author(s):
-* @author ryo; student ID
+* @author Ryotaro Hikichi
 * @author Full name; student ID
 * <<Add additional lead authors here>>
 *

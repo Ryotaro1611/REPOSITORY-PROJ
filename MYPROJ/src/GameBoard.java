@@ -58,8 +58,6 @@ public class GameBoard extends JPanel
     // MemoryGame is a memorygame
     private MemoryGame memoryGame;
     
-    private boolean gameStarted;
-
     /**
      * Constructor - initializes board and sets up game
      */
