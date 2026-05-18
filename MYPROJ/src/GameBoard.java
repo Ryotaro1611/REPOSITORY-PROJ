@@ -32,7 +32,7 @@ import java.util.List;
  * Stack Overflow. (n.d.). Random shuffling of an array or list in Java. Retrieved April 18, 2026, from
  * https://stackoverflow.com/questions/1519736/random-shuffling-of-an-array
  * 
- * Version/Date: V1 4/30/26
+ * Version/Date: V1 5/17/26
  * 
  * Responsibilities of class:
  * Represents the game board for the memory game.
@@ -57,6 +57,8 @@ public class GameBoard extends JPanel
 
     // MemoryGame is a memorygame
     private MemoryGame memoryGame;
+    
+    private boolean gameStarted;
 
     /**
      * Constructor - initializes board and sets up game
@@ -128,36 +130,8 @@ public class GameBoard extends JPanel
                 tile.setFont(new Font("Arial", Font.BOLD, gridSize == 3 ? 36 : 20));
 
                 // Add click behavior
-                tile.addActionListener(e -> 
-                {
-                    // Do nothing if game hasn't started
-                    if (!memoryGame.isGameStarted()) 
-                    {
-                        return;
-                    }
-
-                    TileButton clicked = (TileButton) e.getSource();
-
-                    // First selection
-                    if (selectedTile == null) 
-                    {
-                        selectedTile = clicked;
-                        selectedTile.setBackground(Color.CYAN);
-                    } 
-                    // Clicking same tile again 
-                    else if (selectedTile == clicked) 
-                    {
-                        selectedTile.setBackground(null);
-                        selectedTile = null;
-                    } 
-                    // Second selection to swap tiles
-                    else 
-                    {
-                        swapTiles(selectedTile, clicked);
-                        selectedTile.setBackground(null);
-                        selectedTile = null;
-                    }
-                });
+                tile.addActionListener(new TileButtonListener(this, tile));
+                   
 
                 tiles[row][col] = tile;
                 add(tile); // add tile to panel
@@ -262,4 +236,36 @@ public class GameBoard extends JPanel
         }
         return true;
     }
+    
+    /**
+     * 
+     * Purpose: Returns the selected tile from gameboard
+     * 
+     * @return the selected TileButton
+     */
+    public TileButton getSelectedTile()
+    {
+        return selectedTile;
+    }
+
+    /**
+     * 
+     * Purpose: Set the current selected tile on the gameboard
+     * 
+     * @param tile in tileButton to select
+     */
+    public void setSelectedTile(TileButton tile)
+    {
+        selectedTile = tile;
+    }
+	/**
+	 * Purpose: Get memory game
+	 * 
+	 * @return MemoryGame object
+	 */
+	public MemoryGame getMemoryGame()
+	{
+		return memoryGame;
+	}
+	
 }

@@ -22,7 +22,7 @@ import javax.swing.*;
  * Stack Overflow. (n.d.). How to use a Swing Timer in Java. Retrieved April 22, 2026, from 
  * https://stackoverflow.com/questions/4044726/java-swing-timer-example
  * 
- * Version/Date: V1 4/30/26
+ * Version/Date: V1 5/17/26
  * 
  * Responsibilities of class:
  * Manages the game timer.

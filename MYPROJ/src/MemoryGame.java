@@ -48,7 +48,7 @@ import java.util.Scanner;
  * Oracle. (n.d.). Class Scanner. Retrieved May 13, 2026, from
  * https://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html
  * 
- * Version/Date: V1 4/30/26
+ * Version/Date: V1 5/17/26
  *  
  * Responsibilities of class:
  * Acts as the main window (JFrame) for the memory game.
@@ -327,4 +327,5 @@ public class MemoryGame extends JFrame
         // Ensures GUI runs on Event Dispatch Thread
         SwingUtilities.invokeLater(MemoryGame::new);
     }
+
 }

@@ -19,7 +19,7 @@ import java.awt.*;
  * Oracle. (n.d.). JButton (Java Platform SE 8). Retrieved April 15, 2026, from 
  * https://docs.oracle.com/javase/8/docs/api/javax/swing/JButton.html
  *  
- * Version/date: V1 4/30/26
+ * Version/date: V1 5/17/26
  * 
  * Responsibilities of class:
  * Represents a tile in the game whilist storing its values and position
