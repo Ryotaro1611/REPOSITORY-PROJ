@@ -68,39 +68,49 @@ public class TileButtonListener implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent E)
 	{
-		// Do no do anything if the games has not started
-		if (!board.getMemoryGame().isGameStarted())
+		try
 		{
-			return;
+			// Do no do anything if the games has not started
+			if (!board.getMemoryGame().isGameStarted())
+			{
+				throw new IllegalStateException(
+						"Start timer before selecting tiles.");
+			}
+		
+			// First selected tile
+			if(board.getSelectedTile() == null)
+			{
+				board.setSelectedTile(tile);
+			
+				// Highlight selected tile
+				tile.setBackground(Color.CYAN);
+			}
+		
+			// When clicking the same tile again
+			else if (board.getSelectedTile() == tile)
+			{
+				tile.setBackground(null);
+			
+				board.setSelectedTile(null);
+			}
+		
+			// Second selection to swap
+			else
+			{
+				board.swapTiles(board.getSelectedTile(), tile);
+			
+				// remove tile highlight after the swap
+				board.getSelectedTile().setBackground(null);
+			
+				board.setSelectedTile(null);
+			}
 		}
 		
-		// First selected tile
-		if(board.getSelectedTile() == null)
-		{
-			board.setSelectedTile(tile);
-			
-			// Highlight selected tile
-			tile.setBackground(Color.CYAN);
-		}
-		
-		// When clicking the same tile again
-		else if (board.getSelectedTile() == tile)
-		{
-			tile.setBackground(null);
-			
-			board.setSelectedTile(null);
-		}
-		
-		// Second selection to swap
-		else
-		{
-			board.swapTiles(board.getSelectedTile(), tile);
-			
-			// remove tile highlight after the swap
-			board.getSelectedTile().setBackground(null);
-			
-			board.setSelectedTile(null);
-		}
+			catch(IllegalStateException exception)
+			{
+				// Display why the message until player has started timer
+				System.out.println(exception.getMessage());
+			}
 	}
 }
 	

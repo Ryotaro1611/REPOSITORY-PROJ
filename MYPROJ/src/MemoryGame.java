@@ -48,6 +48,12 @@ import java.util.Scanner;
  * Oracle. (n.d.). Class Scanner. Retrieved May 13, 2026, from
  * https://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html
  * 
+ * Oracle. (n.d.). The Event Dispatch Thread. Retrieved May, 2026 from
+ * https://docs.oracle.com/javase/tutorial/uiswing/concurrency/dispatch.html
+ * 
+ * Oracle. (n.d.). SwingUtilities. Retrieved May, 2026 from
+ * https://docs.oracle.com/javase/8/docs/api/javax/swing/SwingUtilities.html
+ * 
  * Version/Date: V1 5/17/26
  *  
  * Responsibilities of class:
@@ -72,6 +78,9 @@ public class MemoryGame extends JFrame
     
     // Has a reset button
     private JButton resetButton;
+    
+    //Has a scoresButton
+    private JButton scoresButton;
 
     // Has a difficulty menu
     private DifficultyMenu difficultyMenu;
@@ -117,6 +126,7 @@ public class MemoryGame extends JFrame
         startButton = new JButton("Start Timer");
         checkButton = new JButton("Check");
         resetButton = new JButton("Reset");
+        scoresButton = new JButton("Scores");
 
         // Bottom panel for controls
         JPanel bottomPanel = new JPanel();
@@ -124,7 +134,7 @@ public class MemoryGame extends JFrame
         bottomPanel.add(startButton);
         bottomPanel.add(checkButton);
         bottomPanel.add(resetButton);
-
+        bottomPanel.add(scoresButton);
         // Create timer object
         gameTimer = new GameTimer(timerLabel);
 
@@ -139,6 +149,7 @@ public class MemoryGame extends JFrame
         startButton.addActionListener(e -> startGame());
         checkButton.addActionListener(e -> checkGame());
         resetButton.addActionListener(e -> resetGame());
+        scoresButton.addActionListener(e -> loadScores());
 
         // Final window setup
         pack();
@@ -258,20 +269,28 @@ public class MemoryGame extends JFrame
      */
     public void saveScore(String playerName, int time)
     {
+    	PrintWriter writer = null;
+    	
     	try
     	{
-    		//Create file
-    		PrintWriter writer = 
-    				new PrintWriter(new FileWriter("scores.txt", true));
-    				
+    		// Create writer
+    		writer = new PrintWriter ("scores.txt");
+ 
+    		// Save player name and time
     		writer.println(playerName + "," + time);
-    		
-    		//Save and close writer
-    		writer.close();
+   
     	}
     	catch (IOException e)
     	{
     		System.out.println("Error saving score.");
+    	}
+    	finally
+    	{
+    		if(writer !=null)
+    		{
+    			// Close
+    			writer.close();
+    		}
     	}
     }
     
@@ -280,10 +299,12 @@ public class MemoryGame extends JFrame
      */
     public void loadScores()
     {
+    	Scanner scan = null;
+    	
     	try
     	{
-    		// Open file
-    		Scanner scan = new Scanner(new File("scores.txt"));
+    		// Create Scanner
+    		scan = new Scanner(new File("scores.txt"));
     		
     		String scores = " ";
     		
@@ -293,13 +314,11 @@ public class MemoryGame extends JFrame
     			scores += scan.nextLine() + "\n";
     		}
     		
-    		scan.close();
-    		
     		//Display score
     		JOptionPane.showMessageDialog(
     				this, 
     				scores,
-    				"High Scores",
+    				"Scoresheet",
     				JOptionPane.INFORMATION_MESSAGE);
     		
     	}
@@ -307,6 +326,15 @@ public class MemoryGame extends JFrame
     	catch(Exception e)
     	{
     		System.out.println("Could not load scores.");
+    	}
+    	
+    	finally
+    	{
+    		if(scan != null)
+    		{
+    			// Close
+    			scan.close();
+    		}
     	}
     }
     
