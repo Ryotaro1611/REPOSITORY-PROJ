@@ -3,7 +3,7 @@ import javax.swing.*;
 /**
 * 
  * Lead Author(s):
- * @author Ryotaro Hikichi
+ * @author Ryotaro Hikichi 5550221052
  * @author 
  * <<add additional lead authors here, with a full first and last name>>
  * 
@@ -23,7 +23,7 @@ import javax.swing.*;
  * https://docs.oracle.com/javase/8/docs/api/javax/swing/ButtonGroup.html
  * 
  *  
- * Version/date: V1 5/17/26
+ * Version/date: V1 6/1/26
  * 
  * Responsibilities of class:
  * Represents a difficulty selection menu with radio buttons.
@@ -74,7 +74,7 @@ public class DifficultyMenu extends JPanel
             return 5;
         }
         
-        // Otherwise return to easy mode 3x3
+        // Otherwise return to easy mode 3x3 to make it default
         return 3;
     }
 }

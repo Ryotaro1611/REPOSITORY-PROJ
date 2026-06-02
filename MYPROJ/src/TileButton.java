@@ -19,7 +19,7 @@ import java.awt.*;
  * Oracle. (n.d.). JButton (Java Platform SE 8). Retrieved April 15, 2026, from 
  * https://docs.oracle.com/javase/8/docs/api/javax/swing/JButton.html
  *  
- * Version/date: V1 5/17/26
+ * Version/date: V1 6/1/26
  * 
  * Responsibilities of class:
  * Represents a tile in the game whilist storing its values and position
@@ -50,8 +50,13 @@ public class TileButton extends JButton
      */
     public TileButton(int value, int row, int col) 
     {
+    	// Store the tile's value
     	this.value = value;
+    	
+    	// Store the tile's row
         this.row = row;
+        
+        // Store the tile's column
         this.col = col;
 
         // Display the value as button test

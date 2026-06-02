@@ -8,7 +8,7 @@ import java.util.Scanner;
 /**
 * 
  * Lead Author(s):
- * @author Ryotaro Hikichi
+ * @author Ryotaro Hikichi 5550221052
  * @author 
  * <<add additional lead authors here, with a full first and last name>>
  * 
@@ -17,7 +17,8 @@ import java.util.Scanner;
  * 
  * References:
  * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
- * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
+ * Retrieved from 
+ * https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
  * 
  * Gaddis, T. (2015). Starting out with Java: From control structures through objects. Addison-Wesley. 
  * 
@@ -48,13 +49,7 @@ import java.util.Scanner;
  * Oracle. (n.d.). Class Scanner. Retrieved May 13, 2026, from
  * https://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html
  * 
- * Oracle. (n.d.). The Event Dispatch Thread. Retrieved May, 2026 from
- * https://docs.oracle.com/javase/tutorial/uiswing/concurrency/dispatch.html
- * 
- * Oracle. (n.d.). SwingUtilities. Retrieved May, 2026 from
- * https://docs.oracle.com/javase/8/docs/api/javax/swing/SwingUtilities.html
- * 
- * Version/Date: V1 5/17/26
+ * Version/Date: V1 6/1/26
  *  
  * Responsibilities of class:
  * Acts as the main window (JFrame) for the memory game.
@@ -99,6 +94,7 @@ public class MemoryGame extends JFrame
      */
     public MemoryGame() 
     {
+    	// Set title 
         setTitle("Matrix Grid Memory Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -135,6 +131,7 @@ public class MemoryGame extends JFrame
         bottomPanel.add(checkButton);
         bottomPanel.add(resetButton);
         bottomPanel.add(scoresButton);
+        
         // Create timer object
         gameTimer = new GameTimer(timerLabel);
 
@@ -246,6 +243,7 @@ public class MemoryGame extends JFrame
         } 
         else 
         {
+        	// Player loses and send message
             JOptionPane.showMessageDialog(this, "Try again bud");
             instructionLabel.setText("You forgot. Press Reset to try again.");
            
@@ -260,7 +258,10 @@ public class MemoryGame extends JFrame
      */
     public void resetGame() 
     {
+    	//Stop timer
         gameTimer.stopTimer();
+        
+        // Reset board
         setupBoard();
     }
     
@@ -269,6 +270,7 @@ public class MemoryGame extends JFrame
      */
     public void saveScore(String playerName, int time)
     {
+    	// Declare writer outside to close writer
     	PrintWriter writer = null;
     	
     	try
@@ -280,12 +282,15 @@ public class MemoryGame extends JFrame
     		writer.println(playerName + "," + time);
    
     	}
+    	
+    	// If try block does not work send message
     	catch (IOException e)
     	{
-    		System.out.println("Error saving score.");
+    		JOptionPane.showMessageDialog(null,"Error saving score.");
     	}
     	finally
     	{
+    		//Close writer
     		if(writer !=null)
     		{
     			// Close
@@ -299,13 +304,15 @@ public class MemoryGame extends JFrame
      */
     public void loadScores()
     {
+    	// Declare scanner outside to close scanner
     	Scanner scan = null;
     	
     	try
     	{
-    		// Create Scanner
+    		// Create Scanner and overwrite
     		scan = new Scanner(new File("scores.txt"));
     		
+    		// scores will be a string
     		String scores = " ";
     		
     		// Read until the end
@@ -323,16 +330,17 @@ public class MemoryGame extends JFrame
     		
     	}
     	
-    	catch(Exception e)
+    	// If can try block does not work throw exception
+    	catch(IOException e)
     	{
-    		System.out.println("Could not load scores.");
+    		JOptionPane.showMessageDialog(this,"Could not load Scores: " + e.getMessage());
     	}
     	
     	finally
     	{
     		if(scan != null)
     		{
-    			// Close
+    			// Close scanner
     			scan.close();
     		}
     	}
@@ -352,8 +360,25 @@ public class MemoryGame extends JFrame
      */
     public static void main(String[] args) 
     {
-        // Ensures GUI runs on Event Dispatch Thread
-        SwingUtilities.invokeLater(MemoryGame::new);
+        // Not needed but just in case we wanted to add multithreaded code
+    	// SwingUtilities.invokeLater(MemoryGame::new);
+    	
+    	// References
+    	// 1.) Why to use SwingUtilities.invokeLater in main method? (n.d.). Stack Overflow. 
+    	// https://stackoverflow.com/questions/15302085/why-to-use-swingutilities-invokelater-in-main-method
+    	// 2.) SwingUtilities.invokeLater( runnable ) and lambdas (Features new in Java 8 forum at Coderanch). (n.d.). Coderanch, a friendly place for programming greenhorns!. 
+    	// https://coderanch.com/t/654519/java/SwingUtilities-invokeLater-Runnable-lambdas
+    	
+    	try 
+    	{
+    		new MemoryGame();
+    	}
+    	
+    	//Catch all exceptions when starting MemoryGame
+    	catch(Exception e)
+    	{
+    		JOptionPane.showMessageDialog(null,"Oops!, Sorry about that " + e.getMessage());
+    	}
     }
 
 }

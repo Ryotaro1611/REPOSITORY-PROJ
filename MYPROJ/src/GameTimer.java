@@ -3,7 +3,7 @@ import javax.swing.*;
 /**
 * 
  * Lead Author(s):
- * @author Ryotaro Hikichi
+ * @author Ryotaro Hikichi 5550221052
  * @author 
  * <<add additional lead authors here, with a full first and last name>>
  * 
@@ -19,10 +19,11 @@ import javax.swing.*;
  * Oracle. (n.d.). Timer (Java Platform SE 8). Retrieved April 22, 2026, from 
  * https://docs.oracle.com/javase/8/docs/api/javax/swing/Timer.html
  * 
- * Stack Overflow. (n.d.). How to use a Swing Timer in Java. Retrieved April 22, 2026, from 
- * https://stackoverflow.com/questions/4044726/java-swing-timer-example
+ * Horstmann, C. S. (n.d.). 6.2 (Java) Lambda Expressions Java interfaces, Lambda expressions, and inner classes InformIT. 
+ * https://www.informit.com/articles/article.aspx?p=3145758&seqNum=2
  * 
- * Version/Date: V1 5/17/26
+ * 
+ * Version/Date: V1 6/1/26
  * 
  * Responsibilities of class:
  * Manages the game timer.
@@ -47,8 +48,12 @@ public class GameTimer
     {
         this.timerLabel = timerLabel;
         this.elapsedSeconds = 0;
-
-        // Timer updates every 1000 ms(Oracle)
+        
+        // Reference has a timer example
+        // Horstmann, C. S. (n.d.). 6.2 (Java) Lambda Expressions Java interfaces, Lambda expressions, and inner classes InformIT. 
+        // https://www.informit.com/articles/article.aspx?p=3145758&seqNum=2
+        
+        // Timer updates every 1000 ms
         timer = new Timer(1000, e -> 
         {
         	// increase time
@@ -82,6 +87,8 @@ public class GameTimer
     {
     	// stop if running
         stopTimer();
+        
+        //Set timer to 0
         elapsedSeconds = 0;
         timerLabel.setText("Time: 0");
     }

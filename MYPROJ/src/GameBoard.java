@@ -7,7 +7,7 @@ import java.util.List;
 /**
 * 
  * Lead Author(s):
- * @author Ryotaro Hikichi
+ * @author Ryotaro Hikichi 5550221052
  * @author 
  * <<add additional lead authors here, with a full first and last name>>
  * 
@@ -32,7 +32,7 @@ import java.util.List;
  * Stack Overflow. (n.d.). Random shuffling of an array or list in Java. Retrieved April 18, 2026, from
  * https://stackoverflow.com/questions/1519736/random-shuffling-of-an-array
  * 
- * Version/Date: V1 5/17/26
+ * Version/Date: V1 6/1/26
  * 
  * Responsibilities of class:
  * Represents the game board for the memory game.
@@ -59,7 +59,7 @@ public class GameBoard extends JPanel
     private MemoryGame memoryGame;
     
     /**
-     * Constructor - initializes board and sets up game
+     * Initializes board and sets up game
      */
     public GameBoard(int gridSize, MemoryGame memoryGame) 
     {
@@ -85,6 +85,7 @@ public class GameBoard extends JPanel
      */
     public void generatePattern() 
     {
+    	// Create a list that will store all values
         List<Integer> patternValues = new ArrayList<>();
 
         // Fill list with values 1 to gridSize^2
@@ -98,6 +99,8 @@ public class GameBoard extends JPanel
 
         // Copy shuffled values into 2D array
         int index = 0;
+        
+        // Copy each value of the tile and assign into the correct pattern
         for (int row = 0; row < gridSize; row++) 
         {
             for (int col = 0; col < gridSize; col++) 
@@ -116,7 +119,7 @@ public class GameBoard extends JPanel
         // Grid layout for tiles
         setLayout(new GridLayout(gridSize, gridSize, 5, 5));
 
-        
+        // Loop through every row and column
         for (int row = 0; row < gridSize; row++) 
         {
             for (int col = 0; col < gridSize; col++) 
@@ -142,10 +145,12 @@ public class GameBoard extends JPanel
      */
     public void showPattern() 
     {
+    	// Loop through every tile pattern on the board
         for (int row = 0; row < gridSize; row++) 
         {
             for (int col = 0; col < gridSize; col++) 
             {
+            	// Set each tile to display tile's correct pattern
                 tiles[row][col].setValue(correctPattern[row][col]);
             }
         }
@@ -171,7 +176,8 @@ public class GameBoard extends JPanel
         do 
         {
             Collections.shuffle(values);
-        } while (isSameAsCorrect(values));
+        } 
+        while (isSameAsCorrect(values));
 
         // Apply shuffled values to tiles
         int index = 0;
@@ -190,12 +196,15 @@ public class GameBoard extends JPanel
      */
     private boolean isSameAsCorrect(List<Integer> values) 
     {
-        int index = 0;
+        // Start at the first value
+    	int index = 0;
 
+    	// Compare every value with correct pattern
         for (int row = 0; row < gridSize; row++) 
         {
             for (int col = 0; col < gridSize; col++) 
             {
+            	// Return false if it is a different value
                 if (values.get(index) != correctPattern[row][col]) 
                 {
                     return false;
@@ -203,6 +212,8 @@ public class GameBoard extends JPanel
                 index++;
             }
         }
+        
+        // Return true if values are correct
         return true;
     }
 
@@ -211,8 +222,13 @@ public class GameBoard extends JPanel
      */
     public void swapTiles(TileButton first, TileButton second) 
     {
+    	// store the tile's value
         int temp = first.getValue();
+        
+        // Move the second tile's value into the first
         first.setValue(second.getValue());
+        
+        // Move the saved value into the second tile
         second.setValue(temp);
     }
 
@@ -222,16 +238,19 @@ public class GameBoard extends JPanel
      */
     public boolean isCorrectOrder() 
     {
+    	// Compare every tile to the correct pattern
         for (int row = 0; row < gridSize; row++) 
         {
             for (int col = 0; col < gridSize; col++) 
             {
+            	// Return false if the tile is not in the correct order
                 if (tiles[row][col].getValue() != correctPattern[row][col]) 
                 {
                     return false;
                 }
             }
         }
+        // Return true if it is correct
         return true;
     }
     
@@ -257,6 +276,7 @@ public class GameBoard extends JPanel
         selectedTile = tile;
     }
 	/**
+	 * 
 	 * Purpose: Get memory game
 	 * 
 	 * @return MemoryGame object

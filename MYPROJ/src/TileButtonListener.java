@@ -1,9 +1,10 @@
 import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import javax.swing.*;
 /**
 * Lead Author(s):
-* @author Ryotaro Hikichi
+* @author Ryotaro Hikichi 5550221052
 * @author Full name; student ID
 * <<Add additional lead authors here>>
 *
@@ -31,12 +32,12 @@ import java.awt.event.ActionEvent;
 * Retrieved May 17, 2026, from
 * https://docs.oracle.com/javase/8/docs/api/java/awt/Color.html
 *
-* Version: 2026-05-17
+* Version: 6/1/26
+* Responsibilities of class:
+* This class handles button clicks keeps track of tile swaps and selected tiles
+* 
 */
 
-/**
- * TileButton is associated with gameboard and a Tilebutton object to perform swaps
- */
 
 // Is a Action Listener
 public class TileButtonListener implements ActionListener
@@ -55,8 +56,10 @@ public class TileButtonListener implements ActionListener
 	TileButtonListener(GameBoard board, TileButton tile)
 	
 	{
+		// Store to gameboard
 		this.board = board;
 		
+		// Store to specific tile
 		this.tile = tile;
 	}
 	
@@ -80,6 +83,7 @@ public class TileButtonListener implements ActionListener
 			// First selected tile
 			if(board.getSelectedTile() == null)
 			{
+				// Make tile selected
 				board.setSelectedTile(tile);
 			
 				// Highlight selected tile
@@ -89,27 +93,32 @@ public class TileButtonListener implements ActionListener
 			// When clicking the same tile again
 			else if (board.getSelectedTile() == tile)
 			{
+				// Remove the highlight 
 				tile.setBackground(null);
 			
+				// Unselect the tile
 				board.setSelectedTile(null);
 			}
 		
 			// Second selection to swap
 			else
 			{
+				// Swap the values between the two tiles
 				board.swapTiles(board.getSelectedTile(), tile);
 			
 				// remove tile highlight after the swap
 				board.getSelectedTile().setBackground(null);
 			
+				// Unselect the tile
 				board.setSelectedTile(null);
 			}
 		}
 		
+			// If try block does not execute throw this exception
 			catch(IllegalStateException exception)
 			{
-				// Display why the message until player has started timer
-				System.out.println(exception.getMessage());
+				// Display message why the game cannot start on the gui
+				JOptionPane.showMessageDialog(null, exception.getMessage());
 			}
 	}
 }
